@@ -178,6 +178,10 @@ textarea {
   <option>pojok kanan bawah</option>
   <option>pojok kiri bawah</option>
 </select>
+<label>
+  <input type="checkbox" id="modePro">
+  Mode Profesional (hasil visual lebih rapi & detail)
+</label>
 
 <button onclick="buatPrompt()">⚡ BUAT PROMPT</button>
 
@@ -243,16 +247,18 @@ if (watermark.value !== "") {
            wmpos.value + '.\n';
 }
 
-hasil +=
-hasil +=
-"\nArahan kualitas visual:\n" +
-"- Gunakan komposisi profesional dengan fokus utama yang jelas\n" +
-"- Terapkan hierarki visual yang kuat (judul paling menonjol)\n" +
-"- Pencahayaan sinematik sesuai suasana\n" +
-"- Kedalaman visual realistis dan detail tinggi\n" +
-"- Penempatan teks rapi dan mudah dibaca\n" +
-"- Hindari elemen acak atau berantakan\n" +
-"- Pastikan desain siap untuk media sosial dan terlihat profesional\n";
+if (document.getElementById("modePro").checked) {
+  hasil +=
+  "\nArahan kualitas visual (Mode Profesional):\n" +
+  "- Gunakan komposisi profesional dengan fokus utama yang jelas\n" +
+  "- Terapkan hierarki visual yang kuat (judul paling menonjol)\n" +
+  "- Pencahayaan sinematik sesuai suasana\n" +
+  "- Kedalaman visual realistis dan detail tinggi\n" +
+  "- Penempatan teks rapi dan mudah dibaca\n" +
+  "- Hindari elemen acak atau berantakan\n" +
+  "- Pastikan desain terlihat premium dan siap dipublikasikan\n";
+}
+
 
 
 document.getElementById("hasil").value = hasil;
@@ -277,4 +283,5 @@ function resetForm() {
 
 </body>
 </html>
+
 
