@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prompt Generator Jualan Visual</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+}
+
+.header {
+  background: linear-gradient(135deg, #5b5dfb, #7c7cff);
+  color: white;
+  padding: 25px 15px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header p {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.container {
+  max-width: 720px;
+  background: white;
+  margin: -20px auto 40px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+}
+
+select, input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #5b5dfb;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.copy {
+  background: #16a34a;
+}
+
+button.reset {
+  background: #e5e7eb;
+  color: #111;
+}
+
+button.preset {
+  background: #e5e7eb;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.status {
+  margin-top: 8px;
+  color: #16a34a;
+  font-size: 14px;
+  display: none;
+}
+
+textarea {
+  margin-top: 10px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Prompt Generator Jualan Visual</h1>
+  <p>Buat prompt poster, konten, dan desain AI tanpa ribet</p>
+</div>
+
+<div class="container">
+
+<label>Preset Cepat</label>
+<button class="preset" onclick="presetJualan()">Poster Jualan</button>
+<button class="preset" onclick="presetEdukasi()">Konten Edukasi</button>
+<button class="preset" onclick="presetEvent()">Event / Pengumuman</button>
+
+<label>Jenis Konten</label>
+<select id="jenis">
+  <option>Poster</option>
+  <option>Infografik</option>
+  <option>Carousel</option>
+  <option>Komik</option>
+</select>
+
+<label>Platform</label>
+<select id="platform">
+  <option>Instagram Feed (4:5)</option>
+  <option>Instagram Story (9:16)</option>
+  <option>Instagram Square (1:1)</option>
+  <option>TikTok / Shorts (9:16)</option>
+  <option>YouTube (16:9)</option>
+  <option>Poster Cetak A4 (2:3)</option>
+</select>
+
+<label>Target Audiens</label>
+<select id="target">
+  <option>Anak-anak</option>
+  <option>Profesional</option>
+  <option>Gen Z</option>
+</select>
+
+<label>Suasana & Warna</label>
+<select id="mood">
+  <option>Ceria</option>
+  <option>Gelap Elegan</option>
+  <option>Pastel Lembut</option>
+</select>
+
+<label>Gaya Visual</label>
+<select id="gaya">
+  <option>3D Claymation</option>
+  <option>Cinematic Realism</option>
+  <option>Anime Ghibli</option>
+  <option>Tech Blueprint</option>
+  <option>3D Knitted</option>
+  <option>3D Papercraft</option>
+  <option>3D Papercut Diorama</option>
+</select>
+
+<label>Judul Utama</label>
+<input id="headline">
+
+<label>CTA</label>
+<input id="cta">
+
+<label>Deskripsi Visual</label>
+<textarea id="visual" rows="4"></textarea>
+
+<hr>
+
+<h3>Branding (Opsional)</h3>
+
+<label>Header</label>
+<input id="header">
+
+<label>Footer</label>
+<input id="footer">
+
+<label>Watermark</label>
+<input id="watermark">
+
+<label>Posisi Watermark</label>
+<select id="wmpos">
+  <option>tengah</option>
+  <option>pojok kanan bawah</option>
+  <option>pojok kiri bawah</option>
+</select>
+
+<button onclick="buatPrompt()">⚡ BUAT PROMPT</button>
+
+<label>Hasil Prompt</label>
+<textarea id="hasil" rows="14"></textarea>
+
+<button class="copy" onclick="copyPrompt()">📋 COPY PROMPT</button>
+<div id="status" class="status">✅ Prompt berhasil disalin</div>
+
+<button class="reset" onclick="resetForm()">🔄 Reset Form</button>
+
+<div class="footer">
+  © 2026 • Prompt Generator Visual
+</div>
+
+</div>
+
+<script>
+function presetJualan() {
+  jenis.value = "Poster";
+  target.value = "Profesional";
+  mood.value = "Ceria";
+  gaya.value = "3D Claymation";
+  cta.value = "Beli Sekarang";
+}
+
+function presetEdukasi() {
+  jenis.value = "Infografik";
+  target.value = "Gen Z";
+  mood.value = "Pastel Lembut";
+  gaya.value = "Tech Blueprint";
+  cta.value = "";
+}
+
+function presetEvent() {
+  jenis.value = "Poster";
+  target.value = "Profesional";
+  mood.value = "Gelap Elegan";
+  gaya.value = "Cinematic Realism";
+  cta.value = "Catat Tanggalnya";
+}
+
+function buatPrompt() {
+
+var hasil =
+"Buat " + jenis.value + " untuk " + platform.value + ".\n" +
+"Gunakan gaya visual " + gaya.value + ".\n\n" +
+"Fokus target audiens: " + target.value + ".\n" +
+"Terapkan suasana dan warna: " + mood.value + ".\n\n" +
+"Gunakan teks utama: \"" + headline.value + "\".\n" +
+"Tambahkan teks pendukung / CTA: \"" + cta.value + "\".\n\n" +
+"Deskripsi visual:\n" + visual.value + ".\n\n";
+
+if (header.value !== "") {
+  hasil += 'Tambahkan teks header di bagian atas: "' + header.value + '".\n';
+}
+if (footer.value !== "") {
+  hasil += 'Tambahkan teks footer di bagian bawah: "' + footer.value + '".\n';
+}
+if (watermark.value !== "") {
+  hasil += 'Tambahkan watermark teks "' + watermark.value +
+           '" dengan transparansi rendah di posisi ' +
+           wmpos.value + '.\n';
+}
+
+hasil +=
+"\nPastikan desain rapi dan profesional, komposisi seimbang, teks mudah dibaca, resolusi tinggi, siap media sosial.";
+
+document.getElementById("hasil").value = hasil;
+}
+
+function copyPrompt() {
+  var text = document.getElementById("hasil");
+  text.select();
+  document.execCommand("copy");
+  var status = document.getElementById("status");
+  status.style.display = "block";
+  setTimeout(function(){ status.style.display = "none"; }, 2000);
+}
+
+function resetForm() {
+  document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+  document.querySelectorAll("select").forEach(el => el.selectedIndex = 0);
+  document.getElementById("hasil").value = "";
+  document.getElementById("status").style.display = "none";
+}
+</script>
+
+</body>
+</html>
