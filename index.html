@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Prompt Generator Jualan Visual</title>
-
-  background: #5b5dfb;
-  color: white;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 6px;
-  margin-left: 6px;
-}
+<title>Prompt Generator Visual</title>
 
 <style>
 body {
@@ -75,12 +67,6 @@ button.reset {
   color: #111;
 }
 
-button.preset {
-  background: #e5e7eb;
-  color: #111;
-  margin-bottom: 5px;
-}
-
 .status {
   margin-top: 8px;
   color: #16a34a;
@@ -97,19 +83,6 @@ textarea {
   font-size: 12px;
   color: #666;
   margin-top: 20px;
-}.card {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.card h3 {
-  margin-top: 0;
-  font-size: 16px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
 }
 </style>
 </head>
@@ -117,20 +90,11 @@ textarea {
 <body>
 
 <div class="header">
-  <h1>Prompt Generator Jualan Visual</h1>
-  <p>Buat prompt poster, konten, dan desain AI tanpa ribet</p>
+  <h1>Prompt Generator Visual</h1>
+  <p>Buat prompt desain AI tanpa ribet</p>
 </div>
 
 <div class="container">
-<div class="card">
-<h3>Preset Cepat</h3>
-
-<button class="preset" onclick="presetJualan()">Poster Jualan</button>
-<button class="preset" onclick="presetEdukasi()">Konten Edukasi</button>
-<button class="preset" onclick="presetEvent()">Event / Pengumuman</button>
-</div>
-<div class="card">
-<h3>Pengaturan Konten</h3>
 
 <label>Jenis Konten</label>
 <select id="jenis">
@@ -174,7 +138,6 @@ textarea {
   <option>3D Papercraft</option>
   <option>3D Papercut Diorama</option>
 </select>
-</div>
 
 <label>Judul Utama</label>
 <input id="headline">
@@ -185,37 +148,10 @@ textarea {
 <label>Deskripsi Visual</label>
 <textarea id="visual" rows="4"></textarea>
 
-<hr>
-
-<h3>Branding (Opsional)</h3>
-
-<label>Header</label>
-<input id="header">
-
-<label>Footer</label>
-<input id="footer">
-
-<label>Watermark</label>
-<input id="watermark">
-
-<label>Posisi Watermark</label>
-<select id="wmpos">
-  <option>tengah</option>
-  <option>pojok kanan bawah</option>
-  <option>pojok kiri bawah</option>
-</select>
-<div class="pro-card">
-  <span class="pro-title">
-    Mode Profesional
-    <span class="pro-badge">PRO</span>
-  </span>
-
-  <label style="font-weight: normal; margin-top: 8px;">
-    <input type="checkbox" id="modePro">
-    Aktifkan hasil visual lebih rapi, detail, dan konsisten
-  </label>
-</div>
-
+<label>
+  <input type="checkbox" id="modePro">
+  Mode Profesional (hasil visual lebih rapi & detail)
+</label>
 
 <button onclick="buatPrompt()">⚡ BUAT PROMPT</button>
 
@@ -223,77 +159,39 @@ textarea {
 <textarea id="hasil" rows="14"></textarea>
 
 <button class="copy" onclick="copyPrompt()">📋 COPY PROMPT</button>
-<div id="status" class="status">✅ Prompt berhasil disalin</div>
+<div id="status" class="status">Prompt berhasil disalin</div>
 
-<button class="reset" onclick="resetForm()">🔄 Reset Form</button>
+<button class="reset" onclick="resetForm()">🔄 Reset</button>
 
 <div class="footer">
-  © 2026 • Prompt Generator Visual
+  © Prompt Generator Visual
 </div>
 
 </div>
 
 <script>
-function presetJualan() {
-  jenis.value = "Poster";
-  target.value = "Profesional";
-  mood.value = "Ceria";
-  gaya.value = "3D Claymation";
-  cta.value = "Beli Sekarang";
-}
-
-function presetEdukasi() {
-  jenis.value = "Infografik";
-  target.value = "Gen Z";
-  mood.value = "Pastel Lembut";
-  gaya.value = "Tech Blueprint";
-  cta.value = "";
-}
-
-function presetEvent() {
-  jenis.value = "Poster";
-  target.value = "Profesional";
-  mood.value = "Gelap Elegan";
-  gaya.value = "Cinematic Realism";
-  cta.value = "Catat Tanggalnya";
-}
-
 function buatPrompt() {
 
 var hasil =
 "Buat " + jenis.value + " untuk " + platform.value + ".\n" +
-"Gunakan gaya visual " + gaya.value + ".\n\n" +
-"Fokus target audiens: " + target.value + ".\n" +
-"Terapkan suasana dan warna: " + mood.value + ".\n\n" +
-"Gunakan teks utama: \"" + headline.value + "\".\n" +
-"Tambahkan teks pendukung / CTA: \"" + cta.value + "\".\n\n" +
+"Target audiens: " + target.value + ".\n" +
+"Suasana dan warna: " + mood.value + ".\n" +
+"Gaya visual: " + gaya.value + ".\n\n" +
+"Teks utama: " + headline.value + ".\n" +
+"CTA: " + cta.value + ".\n\n" +
 "Deskripsi visual:\n" + visual.value + ".\n\n";
-
-if (header.value !== "") {
-  hasil += 'Tambahkan teks header di bagian atas: "' + header.value + '".\n';
-}
-if (footer.value !== "") {
-  hasil += 'Tambahkan teks footer di bagian bawah: "' + footer.value + '".\n';
-}
-if (watermark.value !== "") {
-  hasil += 'Tambahkan watermark teks "' + watermark.value +
-           '" dengan transparansi rendah di posisi ' +
-           wmpos.value + '.\n';
-}
 
 if (document.getElementById("modePro").checked) {
   hasil +=
-  "\nArahan kualitas visual (Mode Profesional):\n" +
-  "- Gunakan komposisi profesional dengan fokus utama yang jelas\n" +
-  "- Terapkan hierarki visual yang kuat (judul paling menonjol)\n" +
-  "- Pencahayaan sinematik sesuai suasana\n" +
-  "- Kedalaman visual realistis dan detail tinggi\n" +
-  "- Penempatan teks rapi dan mudah dibaca\n" +
-  "- Hindari elemen acak atau berantakan\n" +
-  "- Pastikan desain terlihat premium dan siap dipublikasikan\n";
+  "Arahan kualitas visual:\n" +
+  "- Komposisi rapi dan fokus utama jelas\n" +
+  "- Hierarki visual kuat\n" +
+  "- Pencahayaan sesuai suasana\n" +
+  "- Detail tinggi dan profesional\n";
 }
 
-
+hasil +=
+"\nResolusi tinggi, rapi, siap digunakan.";
 
 document.getElementById("hasil").value = hasil;
 }
@@ -302,9 +200,7 @@ function copyPrompt() {
   var text = document.getElementById("hasil");
   text.select();
   document.execCommand("copy");
-  var status = document.getElementById("status");
-  status.style.display = "block";
-  setTimeout(function(){ status.style.display = "none"; }, 2000);
+  document.getElementById("status").style.display = "block";
 }
 
 function resetForm() {
@@ -317,10 +213,3 @@ function resetForm() {
 
 </body>
 </html>
-
-
-
-
-
-
-
